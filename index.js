@@ -38,9 +38,9 @@ function createMainWindow()
 		,"title-bar-style": "hidden-inset"
 		,"node-integration": false
 	});
-	// mainWindow.hide();
+	mainWindow.hide();
 	mainWindow.loadURL('file://' + __dirname + '/index.html');
-	mainWindow.webContents.openDevTools();
+	// mainWindow.webContents.openDevTools();
 	mainWindow.on('close', function(e)
 	{
 		if (!forceQuit)
@@ -91,7 +91,8 @@ function createTrayIcon()
 			{label: 'スクロール', type: 'radio', click: function() {deviceActionIDs['slider'] = 'scroll';}}
 		]},
 		{label: 'プッシュボタン', submenu: [
-			{label: 'ブラウザ', type: 'radio', checked: true, click: function() {deviceActionIDs['push'] = 'browser';}}
+			{label: 'ブラウザ', type: 'radio', checked: true, click: function() {deviceActionIDs['push'] = 'browser';}},
+			{label: '楽天ログイン', type: 'radio', click: function() {deviceActionIDs['push'] = 'rakuten_login';}}
 		]},
 		{label: 'レバー', submenu: [
 			{label: '楽天ログイン', type: 'radio', checked: true, click: function() {deviceActionIDs['lever'] = 'rakuten_login';}}

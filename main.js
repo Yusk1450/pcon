@@ -27,19 +27,29 @@ var actions = {
             webFrame.setZoomFactor(3.0 * (val / 255));
         }
         else if (actionIDs['slider'] == 'scroll') {
-            webFrame.setZoomFactor(1.0);
             webview.send("scroll", val / 255);
         }
     },
     // ボタン機能
     'BT': function (val) {
-        main.showWindow();
+        var actionIDs = main.getDeviceActionIDs();
+        if (actionIDs['push'] == 'browser') {
+            main.showWindow();
+        }
+        else if (actionIDs['push'] == 'rakuten_login') {
+            main.showWindow();
+            redirect('https://www.rakuten.co.jp/myrakuten/login.html');
+            setTimeout(function () {
+                webview.send("rakuten_login");
+            }, 2000);
+            console.log('rakuten');
+        }
     },
     // レバー機能
     'LV': function (val) {
-        main.showWindow();
-        redirect('https://www.rakuten.co.jp/myrakuten/login.html');
-        webview.send("rakuten_login");
+        // main.showWindow();
+        // redirect('https://www.rakuten.co.jp/myrakuten/login.html');
+        // webview.send("rakuten_login");
     }
 };
 /* --------------------------------------------------------

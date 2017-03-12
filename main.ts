@@ -25,12 +25,12 @@ var actions = {
 	// 電源オフ
 	'OF': (val) =>
 	{
-		// const command = 'shutdown -h now';
-		// exec(command, (error, stdout, stderr) => {
-		// 	console.log(error);
-		// 	console.log(stderr);
-		// });
-		console.log('PC終了！');
+		const command = 'shutdown -h now';
+		exec(command, (error, stdout, stderr) => {
+			console.log(error);
+			console.log(stderr);
+		});
+		// console.log('PC終了！');
 	},
 	// スライダー機能
 	'SL': (val) =>
@@ -43,21 +43,36 @@ var actions = {
 		}
 		else if (actionIDs['slider'] == 'scroll')
 		{
-			webFrame.setZoomFactor(1.0);
 			webview.send("scroll", val / 255);
 		}
 	},
 	// ボタン機能
 	'BT': (val) =>
 	{
-		main.showWindow();
+		var actionIDs = main.getDeviceActionIDs();
+
+		if (actionIDs['push'] == 'browser')
+		{
+			main.showWindow();
+		}
+		else if (actionIDs['push'] == 'rakuten_login')
+		{
+			main.showWindow();
+			redirect('https://www.rakuten.co.jp/myrakuten/login.html');
+
+			setTimeout(function() {
+				webview.send("rakuten_login");
+			}, 2000);
+			
+			console.log('rakuten');
+		}
 	},
 	// レバー機能
 	'LV': (val) =>
 	{
-		main.showWindow();
-		redirect('https://www.rakuten.co.jp/myrakuten/login.html');
-		webview.send("rakuten_login");
+		// main.showWindow();
+		// redirect('https://www.rakuten.co.jp/myrakuten/login.html');
+		// webview.send("rakuten_login");
 	}
 };
 
