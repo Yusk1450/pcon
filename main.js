@@ -13,12 +13,12 @@ var sp = null;
 var actions = {
     // 電源オフ
     'OF': function (val) {
-        // const command = 'shutdown -h now';
-        // exec(command, (error, stdout, stderr) => {
-        // 	console.log(error);
-        // 	console.log(stderr);
-        // });
-        console.log('PC終了！');
+        var command = 'shutdown -h now';
+        exec(command, function (error, stdout, stderr) {
+            console.log(error);
+            console.log(stderr);
+        });
+        // console.log('PC終了！');
     },
     // スライダー機能
     'SL': function (val) {
